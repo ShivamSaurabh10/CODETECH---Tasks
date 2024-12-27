@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+struct Question {
+    std::string question;
+    std::vector<std::string> options;
+    int correct_option;
+};
+
+void ask_question(const Question& q, int& score) {
+    std::cout << "Q: " << q.question << std::endl;
+    for (size_t i = 0; i < q.options.size(); ++i) {
+        std::cout << i + 1 << ". " << q.options[i] << std::endl;
+    }
+    int answer;
+    std::cout << "Your answer (1-" << q.options.size() << "): ";
+    std::cin >> answer;
+    if (answer == q.correct_option) {
+        std::cout << "Correct!\n" << std::endl;
+        ++score;
+    } else {
+        std::cout << "Wrong! The correct answer was " << q.correct_option << ". " << q.options[q.correct_option - 1] << "\n" << std::endl;
+    }
+}
+
+int main() {
+    std::vector<Question> questions = {
+        {"What is the capital of France?", {"Berlin", "London", "Paris", "Rome"}, 3},
+        {"What is 2 + 2?", {"3", "4", "5", "6"}, 2},
+        {"Which planet is known as the Red Planet?", {"Earth", "Mars", "Jupiter", "Venus"}, 2},
+        {"What is the largest ocean on Earth?", {"Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"}, 4}
+    };
+
+    int score = 0;
+    for (const auto& q : questions) {
+        ask_question(q, score);
+    }
+
+    std::cout << "Your final score is " << score << "/" << questions.size() << std::endl;
+    if (score == questions.size()) {
+        std::cout << "Excellent! You got all the answers right." << std::endl;
+    } else if (score > questions.size() / 2) {
+        std::cout << "Good job! You got more than half of the answers correct." << std::endl;
+    } else {
+        std::cout << "Better luck next time!" << std::endl;
+    }
+
+    return 0;
+}
