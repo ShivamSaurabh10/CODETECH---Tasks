@@ -1,0 +1,75 @@
+#include <iostream>
+
+double celsius_to_fahrenheit(double celsius) {
+    return (celsius * 9.0 / 5.0) + 32.0;
+}
+
+double fahrenheit_to_celsius(double fahrenheit) {
+    return (fahrenheit - 32.0) * 5.0 / 9.0;
+}
+
+double celsius_to_kelvin(double celsius) {
+    return celsius + 273.15;
+}
+
+double kelvin_to_celsius(double kelvin) {
+    return kelvin - 273.15;
+}
+
+double fahrenheit_to_kelvin(double fahrenheit) {
+    return celsius_to_kelvin(fahrenheit_to_celsius(fahrenheit));
+}
+
+double kelvin_to_fahrenheit(double kelvin) {
+    return celsius_to_fahrenheit(kelvin_to_celsius(kelvin));
+}
+
+int main() {
+    int choice;
+    double temperature, converted_temp;
+
+    std::cout << "Temperature Conversion Program\n";
+    std::cout << "1. Celsius to Fahrenheit\n";
+    std::cout << "2. Fahrenheit to Celsius\n";
+    std::cout << "3. Celsius to Kelvin\n";
+    std::cout << "4. Kelvin to Celsius\n";
+    std::cout << "5. Fahrenheit to Kelvin\n";
+    std::cout << "6. Kelvin to Fahrenheit\n";
+    std::cout << "Enter your choice (1-6): ";
+    std::cin >> choice;
+
+    std::cout << "Enter the temperature: ";
+    std::cin >> temperature;
+
+    switch (choice) {
+        case 1:
+            converted_temp = celsius_to_fahrenheit(temperature);
+            std::cout << temperature << " Celsius is " << converted_temp << " Fahrenheit\n";
+            break;
+        case 2:
+            converted_temp = fahrenheit_to_celsius(temperature);
+            std::cout << temperature << " Fahrenheit is " << converted_temp << " Celsius\n";
+            break;
+        case 3:
+            converted_temp = celsius_to_kelvin(temperature);
+            std::cout << temperature << " Celsius is " << converted_temp << " Kelvin\n";
+            break;
+        case 4:
+            converted_temp = kelvin_to_celsius(temperature);
+            std::cout << temperature << " Kelvin is " << converted_temp << " Celsius\n";
+            break;
+        case 5:
+            converted_temp = fahrenheit_to_kelvin(temperature);
+            std::cout << temperature << " Fahrenheit is " << converted_temp << " Kelvin\n";
+            break;
+        case 6:
+            converted_temp = kelvin_to_fahrenheit(temperature);
+            std::cout << temperature << " Kelvin is " << converted_temp << " Fahrenheit\n";
+            break;
+        default:
+            std::cout << "Invalid choice\n";
+            break;
+    }
+
+    return 0;
+}
